@@ -1,0 +1,419 @@
+/* ==========================================================================
+   Body & Data — Design Tokens (CSS custom properties)
+   Source of truth: design-system/tokens/tokens.json
+   Measured from bodyanddata.org (Oct 2026) + accessibility extensions.
+
+   Layer 1  Brand core   exact values, never "improve" them
+   Layer 2  Paper        the pastel section grounds (from the site's paper JPGs)
+   Layer 3  Deep         accessible companions for text/UI on light grounds
+   Layer 4  Semantic     what components actually use — themeable
+   ========================================================================== */
+
+:root {
+  /* ---- Layer 1 · Brand core ------------------------------------------- */
+  --bd-plum:          #6A082B; /* site headings, nav, titles */
+  --bd-coral:         #EF473A; /* site CTA buttons ("VIEW MORE") */
+  --bd-logo-red:      #C52027; /* logo page 1 */
+  --bd-logo-magenta:  #94193D; /* logo page 2 */
+  --bd-logo-orange:   #F35F3B; /* logo page 3 */
+  --bd-logo-ink:      #2C1210; /* logo silhouette */
+
+  /* ---- Layer 2 · Paper (section grounds) ------------------------------ */
+  --bd-lavender:  #AF9ED7; /* tagline band, highlight bars, info boxes */
+  --bd-butter:    #FDE688; /* programmes band, MM page */
+  --bd-sky:       #77C0F7; /* publications band */
+  --bd-peach:     #FDC9B4; /* blogs band, bottom strip */
+  --bd-sage:      #91C8A9; /* footer band */
+  --bd-teal:      #6FB4A4; /* fallback under butter paper; portrait backdrops */
+  --bd-sand:      #EDCDA1; /* mission statement band */
+  --bd-mist:      #D3EFFF; /* media monitoring band */
+
+  /* Paper tints — for large reading areas and portal surfaces */
+  --bd-lavender-50: #EFEAF8;
+  --bd-butter-50:   #FFF7D6;
+  --bd-sky-50:      #E4F2FD;
+  --bd-peach-50:    #FFEDE5;
+  --bd-sage-50:     #E3F1E9;
+  --bd-sand-50:     #F8EEDF;
+
+  /* ---- Layer 3 · Deep (AA text/UI companions) ------------------------- */
+  --bd-coral-deep:    #CC3326; /* white text 5.2:1 — small buttons, links */
+  --bd-orchid:        #C94E92; /* decorative only (footer icons on site) */
+  --bd-orchid-deep:   #9A2A68; /* link colour on pastels, 4.9:1 on peach */
+  --bd-lavender-deep: #5E46B0; /* focus ring, selected state, white 7:1 */
+  --bd-sky-deep:      #1F6FB8;
+  --bd-teal-deep:     #0B6B5A;
+  --bd-mustard-deep:  #8A5A00;
+
+  /* Plum-tinted neutrals (never flat grey) */
+  --bd-ink:         #2C1210; /* = logo ink; body text */
+  --bd-ink-soft:    #5B4A4E; /* secondary text on white/tints (8.3:1 on white) */
+  --bd-muted:       #76666A; /* placeholders, disabled — never body text (5.2:1 on white) */
+  --bd-line:        #E6DCDD; /* dividers, card hairlines (decorative) */
+  --bd-line-strong: #9E8C90; /* control outlines — 3.2:1 on white, meets non-text contrast */
+  --bd-white:       #FFFFFF;
+  --bd-paper-warm:  #FFFBF7;
+
+  /* ---- Typography ----------------------------------------------------- */
+  --bd-font-display: "Sniglet", "Baloo 2", "Comfortaa", ui-rounded, "Arial Rounded MT Bold", system-ui, sans-serif;
+  --bd-font-ui:      "Comfortaa", "Baloo 2", ui-rounded, system-ui, sans-serif;
+  --bd-font-body:    "Nunito", "Mukta", ui-rounded, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bd-font-short:   "Sniglet", "Baloo 2", ui-rounded, system-ui, sans-serif; /* card blurbs ≤ 3 lines */
+  --bd-font-mono:    "Space Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  /* Type scale — anchored on the site's measured sizes */
+  --bd-text-xs:   0.8125rem; /* 13 — meta, legal */
+  --bd-text-sm:   0.9375rem; /* 15 — labels, buttons-sm */
+  --bd-text-base: 1.125rem;  /* 18 — body (site: 17–19) */
+  --bd-text-md:   1.25rem;   /* 20 — lede, buttons */
+  --bd-text-lg:   1.5rem;    /* 24 — card titles, H3 */
+  --bd-text-xl:   1.875rem;  /* 30 — prose H2 */
+  --bd-text-2xl:  clamp(2rem, 1.6rem + 1.4vw, 2.625rem);   /* @kind other */ /* section H2, fluid 32–42 */
+  --bd-text-3xl:  clamp(2.5rem, 1.9rem + 2.6vw, 3.625rem); /* @kind other */ /* page H1, fluid 40–58 */
+  --bd-text-4xl:  clamp(3rem, 2rem + 5vw, 5.25rem);        /* @kind other */ /* campaign display, fluid 48–84 */
+
+  --bd-leading-tight: 1.05;
+  --bd-leading-snug:  1.25;
+  --bd-leading-body:  1.7;   /* site uses 1.7 */
+  --bd-tracking-ui:   0.125em; /* eyebrows, labels (site: 2px at 16px) */
+  --bd-tracking-btn:  0.08em;  /* buttons, tabs — tighter reads more confident */
+  --bd-tracking-head: -0.005em; /* Sniglet caps run wide; pull in slightly */
+  --bd-measure:       66ch;
+
+  /* ---- Space (4-based, 56 = site section rhythm) ---------------------- */
+  --bd-space-1: 0.25rem;  --bd-space-2: 0.5rem;  --bd-space-3: 0.75rem;
+  --bd-space-4: 1rem;     --bd-space-5: 1.5rem;  --bd-space-6: 2rem;
+  --bd-space-7: 2.5rem;   --bd-space-8: 3.5rem;  --bd-space-9: 5rem;
+  --bd-space-10: 7rem;
+
+  /* ---- Layout --------------------------------------------------------- */
+  --bd-container:      1080px; /* Divi row */
+  --bd-container-wide: 1268px; /* Divi fullwidth row (89%) */
+  --bd-container-text: 760px;
+  --bd-gutter:         clamp(1rem, 4vw, 2rem); /* @kind spacing */
+  --bd-header-h:       74px;
+
+  /* ---- Shape: cut paper, square by default ---------------------------- */
+  --bd-radius-0:    0;
+  --bd-radius-sm:   3px;   /* inputs, small UI */
+  --bd-radius-pill: 999px; /* tags, chips only */
+  --bd-border-w:    2px;
+  --bd-sticker-w:   6px;   /* portrait/sticker outline */
+
+  /* Layered-pages offset (from the logo) */
+  --bd-layer-offset: 8px;
+  --bd-layer-1: var(--bd-logo-orange);
+  --bd-layer-2: var(--bd-logo-magenta);
+  --bd-layer-3: var(--bd-logo-red);
+
+  /* No soft shadows. One hard "paper lift" for hover/raised states. */
+  --bd-lift: 4px 4px 0 0 var(--bd-plum);
+  --bd-lift-soft: 4px 4px 0 0 rgba(106, 8, 43, 0.18);
+
+  /* ---- Motion --------------------------------------------------------- */
+  --bd-ease:     cubic-bezier(0.34, 1.4, 0.64, 1); /* @kind other */ /* small paper bounce */
+  --bd-ease-out: cubic-bezier(0.2, 0.7, 0.2, 1); /* @kind other */
+  --bd-dur-1: 120ms; /* @kind other */
+  --bd-dur-2: 220ms; /* @kind other */
+  --bd-dur-3: 380ms; /* @kind other */
+
+}
+
+/* Themeable layer. Re-declared on [data-theme="light"] so a light island works inside a dark page. */
+:root, [data-theme="light"] {
+  /* Status (reserved — never reuse as a chart series) */
+  --bd-success: #1E7B4F;
+  --bd-warning: #8A5A00;
+  --bd-danger:  #B3261E;
+  --bd-info:    #1F6FB8;
+
+  /* ---- Layer 4 · Semantic (light) ------------------------------------- */
+  --bd-bg:            var(--bd-white);
+  --bd-surface:       var(--bd-white);
+  --bd-surface-alt:   var(--bd-paper-warm);
+  --bd-text:          var(--bd-ink);
+  --bd-text-soft:     var(--bd-ink-soft);
+  --bd-heading:       var(--bd-plum);
+  --bd-link:          var(--bd-orchid-deep);
+  --bd-link-hover:    var(--bd-plum);
+  --bd-action:        var(--bd-coral);
+  --bd-action-strong: var(--bd-coral-deep);
+  --bd-action-text:   var(--bd-white);
+  --bd-focus:         var(--bd-lavender-deep);
+  --bd-border:        var(--bd-line);
+  --bd-border-strong: var(--bd-line-strong);
+  --bd-selected-bg:   var(--bd-lavender-50);
+  --bd-selected-fg:   var(--bd-lavender-deep);
+  --bd-mark-bg:       var(--bd-butter);
+  --bd-inverse-bg:    var(--bd-ink);   /* tooltips, toasts */
+  --bd-inverse-text:  var(--bd-white);
+
+  /* Tinted surfaces + their text — callouts, tags, art wells. Use these, not the -50 / -deep literals. */
+  --bd-tint-lavender: var(--bd-lavender-50); --bd-on-tint-lavender: var(--bd-lavender-deep);
+  --bd-tint-butter:   var(--bd-butter-50);   --bd-on-tint-butter:   var(--bd-mustard-deep);
+  --bd-tint-peach:    var(--bd-peach-50);    --bd-on-tint-peach:    var(--bd-coral-deep);
+  --bd-tint-sage:     var(--bd-sage-50);     --bd-on-tint-sage:     var(--bd-teal-deep);
+  --bd-tint-sky:      var(--bd-sky-50);      --bd-on-tint-sky:      var(--bd-sky-deep);
+
+  /* Texture + logo behaviour per theme */
+  --bd-grain-blend:   multiply; /* @kind other */
+  --bd-grain-opacity: .09; /* @kind other */
+  --bd-doodle-blend:  multiply; /* @kind other */
+  --bd-logo-plate:    transparent; /* paper plate behind the ink logo in dark */
+  --bd-logo-pad:      0px;
+
+  /* Section bands — components only ever use these */
+  --bd-band-lavender: var(--bd-lavender);
+  --bd-band-butter:   var(--bd-butter);
+  --bd-band-sky:      var(--bd-sky);
+  --bd-band-peach:    var(--bd-peach);
+  --bd-band-sage:     var(--bd-sage);
+  --bd-band-sand:     var(--bd-sand);
+  --bd-band-mist:     var(--bd-mist);
+  --bd-band-plum:     var(--bd-plum);
+  --bd-band-text:     var(--bd-ink);   /* text on any pastel band */
+
+  /* Data-viz categorical (validated: CVD ΔE ≥ 9.3, normal ΔE ≥ 24) */
+  --bd-series-1: #7B5FC7; /* lavender  */
+  --bd-series-2: #EF473A; /* coral     */
+  --bd-series-3: #009479; /* teal      */
+  --bd-series-4: #D9A21B; /* mustard — <3:1, always label directly */
+  --bd-series-5: #C94E92; /* orchid    */
+  --bd-series-6: #3B8FD9; /* sky       */
+  --bd-seq-1: #F6E3EA; --bd-seq-2: #E5A9BD; --bd-seq-3: #C25D82;
+  --bd-seq-4: #94193D; --bd-seq-5: #6A082B; /* plum sequential ramp */
+  --bd-div-neg: #009479; --bd-div-mid: #D9CFD1; --bd-div-pos: #EF473A;
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   Dark theme
+   - <html data-theme="light">   always light (marketing default)
+   - <html data-theme="dark">    always dark
+   - <html data-theme="system">  follow the OS setting
+   data-theme="dark" also works on any element, so a single section, card or
+   embed can be dark inside a light page (give it .bd-root or a bd-section so
+   it paints its own background).
+   Brand core, paper and deep literals never change between themes; only the
+   semantic layer does. Components must use semantic tokens to theme.
+   ========================================================================== */
+[data-theme="dark"] {
+  /* surfaces + text */
+  --bd-bg: #1A1013; --bd-surface: #241519; --bd-surface-alt: #2E1B20;
+  --bd-text: #FBEFE9; --bd-text-soft: #E2CFD2; --bd-heading: #F6B4C6; --bd-muted: #A8969A;
+  --bd-link: #F59AC4; --bd-link-hover: #FFFFFF;
+  --bd-action: #EE4B3E; --bd-action-strong: #CC3326; --bd-action-text: #FFFFFF;
+  --bd-focus: #FDE688; --bd-border: #3D2A2F; --bd-border-strong: #7E6469;
+  --bd-selected-bg: #2C2338; --bd-selected-fg: #CBBDF0; --bd-mark-bg: #6B4E0A;
+  --bd-inverse-bg: #FBEFE9; --bd-inverse-text: #2C1210;
+  /* tints */
+  --bd-tint-lavender: #2C2338; --bd-on-tint-lavender: #CBBDF0;
+  --bd-tint-butter: #332A14;   --bd-on-tint-butter: #F2D27A;
+  --bd-tint-peach: #3A2019;    --bd-on-tint-peach: #FFB4A6;
+  --bd-tint-sage: #16302A;     --bd-on-tint-sage: #8FD9C2;
+  --bd-tint-sky: #142838;      --bd-on-tint-sky: #9CCBF5;
+  /* status — lifted for 4.5:1 on dark surfaces */
+  --bd-success: #5FD39A; --bd-warning: #F2C14E; --bd-danger: #FF8A80; --bd-info: #8CC4F5;
+  /* bands */
+  --bd-band-lavender: #2C2338; --bd-band-butter: #332A14; --bd-band-sky: #142838;
+  --bd-band-peach: #3A2019; --bd-band-sage: #16302A; --bd-band-sand: #33281A;
+  --bd-band-mist: #13252E; --bd-band-plum: #3A0A1C; --bd-band-text: #FBEFE9;
+  /* data viz */
+  --bd-series-1: #8F75DD; --bd-series-2: #EE4B3E; --bd-series-3: #14A084;
+  --bd-series-4: #B8850C; --bd-series-5: #D35C9E; --bd-series-6: #3F93DE;
+  --bd-seq-1: #3A1A24; --bd-seq-2: #6E2340; --bd-seq-3: #A8395F; --bd-seq-4: #DA6E93; --bd-seq-5: #F6B4C6;
+  --bd-div-mid: #4A3B3F;
+  /* lift, texture, logo */
+  --bd-lift: 4px 4px 0 0 #F6B4C6; --bd-lift-soft: 4px 4px 0 0 rgba(0,0,0,.4);
+  --bd-grain-blend: screen; /* @kind other */ --bd-grain-opacity: .05; /* @kind other */ --bd-doodle-blend: screen; /* @kind other */
+  --bd-logo-plate: #FFFBF7; --bd-logo-pad: 6px 10px;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="system"] {
+    /* surfaces + text */
+    --bd-bg: #1A1013; --bd-surface: #241519; --bd-surface-alt: #2E1B20;
+    --bd-text: #FBEFE9; --bd-text-soft: #E2CFD2; --bd-heading: #F6B4C6; --bd-muted: #A8969A;
+    --bd-link: #F59AC4; --bd-link-hover: #FFFFFF;
+    --bd-action: #EE4B3E; --bd-action-strong: #CC3326; --bd-action-text: #FFFFFF;
+    --bd-focus: #FDE688; --bd-border: #3D2A2F; --bd-border-strong: #7E6469;
+    --bd-selected-bg: #2C2338; --bd-selected-fg: #CBBDF0; --bd-mark-bg: #6B4E0A;
+    --bd-inverse-bg: #FBEFE9; --bd-inverse-text: #2C1210;
+    /* tints */
+    --bd-tint-lavender: #2C2338; --bd-on-tint-lavender: #CBBDF0;
+    --bd-tint-butter: #332A14;   --bd-on-tint-butter: #F2D27A;
+    --bd-tint-peach: #3A2019;    --bd-on-tint-peach: #FFB4A6;
+    --bd-tint-sage: #16302A;     --bd-on-tint-sage: #8FD9C2;
+    --bd-tint-sky: #142838;      --bd-on-tint-sky: #9CCBF5;
+    /* status — lifted for 4.5:1 on dark surfaces */
+    --bd-success: #5FD39A; --bd-warning: #F2C14E; --bd-danger: #FF8A80; --bd-info: #8CC4F5;
+    /* bands */
+    --bd-band-lavender: #2C2338; --bd-band-butter: #332A14; --bd-band-sky: #142838;
+    --bd-band-peach: #3A2019; --bd-band-sage: #16302A; --bd-band-sand: #33281A;
+    --bd-band-mist: #13252E; --bd-band-plum: #3A0A1C; --bd-band-text: #FBEFE9;
+    /* data viz */
+    --bd-series-1: #8F75DD; --bd-series-2: #EE4B3E; --bd-series-3: #14A084;
+    --bd-series-4: #B8850C; --bd-series-5: #D35C9E; --bd-series-6: #3F93DE;
+    --bd-seq-1: #3A1A24; --bd-seq-2: #6E2340; --bd-seq-3: #A8395F; --bd-seq-4: #DA6E93; --bd-seq-5: #F6B4C6;
+    --bd-div-mid: #4A3B3F;
+    /* lift, texture, logo */
+    --bd-lift: 4px 4px 0 0 #F6B4C6; --bd-lift-soft: 4px 4px 0 0 rgba(0,0,0,.4);
+    --bd-grain-blend: screen; /* @kind other */ --bd-grain-opacity: .05; /* @kind other */ --bd-doodle-blend: screen; /* @kind other */
+    --bd-logo-plate: #FFFBF7; --bd-logo-pad: 6px 10px;
+    color-scheme: dark;
+  }
+}
+
+/* ---- base + small component set (ported from the design system) ---- */
+*,*::before,*::after{box-sizing:border-box}
+.bd-root{margin:0;background:var(--bd-bg);color:var(--bd-text);font-family:var(--bd-font-body);font-size:var(--bd-text-base);line-height:1.7;-webkit-font-smoothing:antialiased}
+.bd-root img{max-width:100%;height:auto;display:block}
+.bd-root :focus-visible{outline:3px solid var(--bd-focus);outline-offset:3px}
+.bd-root ::selection{background:var(--bd-butter);color:var(--bd-ink)}
+.bd-icon{width:1.25em;height:1.25em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em}
+.bd-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:3rem;padding:.6rem 1.5rem;background:var(--bd-action);color:var(--bd-action-text);border:2px solid var(--bd-action);font:700 1rem/1.1 var(--bd-font-ui);text-transform:uppercase;letter-spacing:var(--bd-tracking-btn);text-decoration:none;cursor:pointer;white-space:nowrap;transition:transform var(--bd-dur-2) var(--bd-ease),box-shadow var(--bd-dur-2)}
+.bd-btn:hover{transform:translate(-2px,-2px);box-shadow:var(--bd-lift)}
+.bd-btn:active{transform:none;box-shadow:none}
+.bd-btn--sm{background:var(--bd-action-strong);border-color:var(--bd-action-strong);min-height:2.5rem;padding:.4rem 1rem;font-size:.8125rem}
+.bd-btn--ghost{background:transparent;color:var(--bd-heading);border-color:currentColor}
+.bd-btn--quiet{background:transparent;border-color:transparent;color:var(--bd-heading);padding-inline:.5rem}
+.bd-btn--quiet:hover{box-shadow:none;transform:none;text-decoration:underline}
+.bd-h1,.bd-h3{font-family:var(--bd-font-display);font-weight:400;color:var(--bd-heading);text-transform:uppercase;line-height:1.05;letter-spacing:var(--bd-tracking-head);text-wrap:balance;margin:0}
+.bd-h1{font-size:var(--bd-text-3xl);line-height:1}.bd-h3{font-size:var(--bd-text-lg)}
+.bd-h2{font-family:var(--bd-font-display);font-weight:400;color:var(--bd-heading);text-transform:uppercase;font-size:var(--bd-text-2xl);margin:0;line-height:1.05}
+.bd-barred{display:grid;gap:var(--bd-space-3)}
+.bd-barred::after{content:"";display:block;height:10px;width:4.5rem;background:var(--bd-lavender)}
+.bd-logo{display:inline-flex;align-items:center}
+.bd-logo img{height:44px;width:auto;box-sizing:content-box;background:var(--bd-logo-plate);padding:var(--bd-logo-pad)}
+.bd-doodles{background-image:url(assets/doodles.svg);background-size:160px}
+
+/* TanaBana: layout and components. Colors, fonts and spacing come from tokens.css */
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;min-height:100vh;padding-bottom:env(safe-area-inset-bottom,0)}
+.wrap{max-width:var(--bd-container);margin-inline:auto;padding-inline:var(--bd-gutter)}
+.wrap.narrow{max-width:720px}
+.skip{position:absolute;left:-999px;top:0;background:var(--bd-action);color:var(--bd-action-text);padding:.6rem 1rem;z-index:50}
+.skip:focus{left:0}
+a{color:var(--bd-link)}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem var(--bd-gutter);padding-top:calc(.85rem + env(safe-area-inset-top,0px));
+  background:var(--bd-surface);border-bottom:var(--bd-border-w) solid var(--bd-heading)}
+.menu-btn{display:inline-flex;align-items:center;gap:.5rem;background:none;border:0;cursor:pointer;
+  font:700 .9rem var(--bd-font-ui);text-transform:uppercase;letter-spacing:var(--bd-tracking-btn);color:var(--bd-heading);padding:.5rem}
+.menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bd-surface);
+  border-bottom:var(--bd-border-w) solid var(--bd-heading)}
+.menu.open{display:flex}
+.menu a{padding:1rem var(--bd-gutter);font:700 .9rem var(--bd-font-ui);text-transform:uppercase;letter-spacing:var(--bd-tracking-btn);
+  color:var(--bd-heading);text-decoration:none;border-top:1px solid var(--bd-line)}
+.menu a:hover{background:var(--bd-surface-alt)}
+@media(min-width:820px){
+  .menu-btn{display:none}
+  .menu{display:flex;position:static;flex-direction:row;gap:.25rem;border:0;background:none}
+  .menu a{border:0;padding:.5rem .9rem}
+}
+
+/* hero: the whole artwork, centred on one screen under the header */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hero{height:calc(100vh - var(--hh,74px));height:calc(100svh - var(--hh,74px));min-height:360px;background:#3B2E74;overflow:hidden}
+
+.slider{position:relative;height:100%;overflow:hidden;touch-action:pan-y}
+.track{display:flex;height:100%;transition:transform .6s var(--bd-ease)}
+.hs{position:relative;flex:0 0 100%;height:100%;overflow:hidden;background:#3B2E74}
+.hero .hs-bg{position:absolute;left:-6%;top:-6%;width:112%;height:112%;max-width:none;object-fit:cover;filter:blur(26px) brightness(.55)}
+.hero .hs-fg{position:relative;display:block;width:100%;max-width:none;height:100%;object-fit:contain}
+.sl-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:3;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;
+  background:var(--bd-surface);color:var(--bd-heading);border:2px solid var(--bd-heading);cursor:pointer}
+.sl-btn.prev{left:12px}.sl-btn.next{right:12px}
+.dots{position:absolute;left:0;right:0;bottom:12px;z-index:3;display:flex;justify-content:center;gap:2px}
+.dot{position:relative;width:28px;height:28px;padding:0;border:0;background:none;cursor:pointer}
+.dot::before{content:"";position:absolute;inset:7px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.4);transition:background var(--bd-dur-2)}
+.dot.on::before{background:#fff}
+@media(prefers-reduced-motion:reduce){.track{transition:none}}
+
+/* about */
+.about{background:var(--bd-band-mist);color:var(--bd-band-text);padding:3rem 0;text-align:center}
+.about .bd-barred{justify-items:center;margin-bottom:1.25rem}
+.about p{margin:0 0 1rem;font-size:1.1rem}
+.facts{display:grid;gap:1rem;margin:2rem 0 0;text-align:left}
+.facts div{border-top:var(--bd-border-w) solid var(--bd-plum);padding-top:.6rem}
+.facts dt{font:700 .75rem var(--bd-font-mono);text-transform:uppercase;letter-spacing:.1em;opacity:.75}
+.facts dd{margin:.2rem 0 0;font-weight:700}
+@media(min-width:640px){.facts{grid-template-columns:repeat(3,1fr)}}
+
+/* sections */
+.block{padding:2.5rem 0}
+.block .wrap{max-width:860px}
+.ruled{border-top:1px solid var(--bd-line)}
+.label{margin:0 0 1.1rem;font:400 .95rem var(--bd-font-mono);text-transform:uppercase;letter-spacing:.12em;color:var(--bd-text-soft)}
+.note{margin:1.75rem 0 0;font-size:var(--bd-text-xs);color:var(--bd-text-soft)}
+.ex{background:var(--t);color:var(--bd-text);border:var(--bd-border-w) solid var(--bd-heading);cursor:pointer}
+
+/* map */
+.map-link{display:block;border:3px solid var(--bd-heading)}
+.map-img{display:block;width:100%;height:auto}
+.map-soon{display:grid;place-items:center;min-height:clamp(220px,42vw,380px);border:3px solid var(--bd-heading);background:var(--bd-surface-alt)}
+.map-soon span{color:var(--bd-heading);font:400 clamp(1.6rem,6vw,2.5rem) var(--bd-font-display);text-transform:uppercase;letter-spacing:var(--bd-tracking-head)}
+
+/* programs: tabs + pictures on the page */
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tab{flex:1 1 0;min-height:54px;padding:.4rem;background:var(--t);color:var(--bd-heading);border:var(--bd-border-w) solid var(--bd-heading);
+  font:400 clamp(1.05rem,4.5vw,1.35rem) var(--bd-font-display);cursor:pointer}
+.tab small{display:block;font:700 .7rem var(--bd-font-mono)}
+.tab[aria-selected="true"]{background:var(--bd-heading);color:var(--bd-surface)}
+.day-panel{padding:12px;border:var(--bd-border-w) solid var(--bd-heading);background:var(--bd-surface-alt)}
+.gal{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:640px){.gal{grid-template-columns:repeat(2,1fr)}}
+.g-item{display:block;padding:0;border:2px solid var(--bd-heading);background:none;cursor:zoom-in}
+.g-item img{display:block;width:100%;height:auto}
+.g-text{display:grid;grid-template-columns:5rem 1fr;gap:.75rem;padding:.5rem}
+.soon{margin:0;padding:2.5rem 1rem;text-align:center;color:var(--bd-text-soft)}
+
+/* exhibitions */
+.ex-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.ex{display:flex;align-items:center;min-height:76px;padding:.7rem .9rem;text-align:left}
+.et{font:400 .98rem/1.25 var(--bd-font-display)}
+@media(min-width:720px){.ex-grid{grid-template-columns:repeat(3,1fr)}.et{font-size:1.1rem}}
+
+/* footer */
+.foot{background:var(--bd-band-plum);color:#fff;padding:2.5rem 0 calc(2.5rem + env(safe-area-inset-bottom,0px))}
+.foot .wrap{max-width:860px;display:flex;flex-wrap:wrap;gap:2rem 4rem}
+.label.inv{color:#F6B4C6}
+.foot a{color:#fff}
+.links{display:flex;flex-direction:column;gap:.35rem;margin:1rem 0 0;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.chip{display:inline-flex;align-items:center;min-height:44px;padding:.4rem .9rem;border:2px solid #fff;font-weight:700;text-decoration:none}
+.chip:has(img){padding:.3rem;background:#fff;border-color:#fff}
+.chip img{display:block;height:84px;width:auto}
+.foot-col.wide{flex:1 1 320px}
+
+/* dialog */
+dialog{width:calc(100% - 2rem);max-width:560px;padding:0;border:var(--bd-border-w) solid var(--bd-heading);
+  background:var(--bd-surface);color:var(--bd-text);box-shadow:var(--bd-lift)}
+dialog::backdrop{background:rgba(44,18,16,.6)}
+.dlg-bar{display:flex;align-items:center;justify-content:space-between;padding:.4rem .5rem .4rem 1rem;background:var(--bd-band-lavender);color:var(--bd-band-text)}
+.dlg-tag{font:700 .75rem var(--bd-font-mono);text-transform:uppercase;letter-spacing:.1em}
+.close{display:grid;place-items:center;width:44px;height:44px;background:none;border:0;cursor:pointer;color:inherit}
+.dlg-body{padding:1.25rem 1.25rem 1.5rem}
+.dlg-body p{margin:.8rem 0 0}
+.dlg-links{display:grid;gap:.6rem;margin-top:1.25rem}
+.dlg-body .bd-btn{margin-top:0;text-align:left;white-space:normal;text-decoration:none}
+.dlg-body small{font:700 .85rem var(--bd-font-mono);color:var(--bd-text-soft)}
+dialog.lightbox{max-width:min(920px,calc(100% - 2rem))}
+dialog.lightbox .dlg-body{padding:0}
+.lb{display:block;width:100%;height:auto}
+.dlg-img{width:100%;margin-top:1rem}
+.time{font:700 .9rem var(--bd-font-mono);color:var(--bd-heading)}
+.muted{color:var(--bd-text-soft)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ===== Fonts: Pixelify Sans for the logo only. Sniglet for headings, Nunito for everything else ===== */
+html:root{--bd-font-ui:var(--bd-font-body);--bd-font-mono:var(--bd-font-body)}
+.bd-h1,.bd-h2,.bd-h3,.label{font-family:var(--bd-font-display)}
+.label{font-size:1.05rem;font-weight:400}
+
+/* logo: no background; TANA in pink, BANA in orange (slightly deeper tones so they read on white) */
+.brand{display:inline-flex;align-items:center;text-decoration:none;font-family:"Pixelify Sans",monospace;font-weight:700;font-size:1.8rem;line-height:1;letter-spacing:.01em}
+.brand span:first-child{color:#E5527E}
+.brand span:last-child{color:#E36F17}

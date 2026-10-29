@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TanaBana: Weaving Through Technology, Power and Justice</title>
+<meta name="description" content="TanaBana is an interactive exhibition organized by Body &amp; Data. It explores how technology is woven into our lives, rights and society.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Pixelify+Sans:wght@400..700&family=Sniglet:wght@400;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="bd-root">
+<a class="skip" href="#about">Skip to content</a>
+
+<header class="top" id="top">
+  <a class="brand" href="#main" aria-label="TanaBana"><span>Tana</span><span>Bana</span></a>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">
+    <span>Menu</span>
+    <svg class="bd-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav class="menu" id="menu" aria-label="Sections">
+    <a href="#about">About</a>
+    <a href="#map">Exhibition map</a>
+    <a href="#programs">Programs</a>
+    <a href="#exhibitions">Exhibitions</a>
+    <a href="#organizers">Organizers</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero" aria-label="TanaBana">
+    <h1 class="sr">TanaBana: Weaving Through Technology, Power and Justice</h1>
+    <div class="slider" id="slider" role="region" aria-roledescription="carousel" aria-label="TanaBana images">
+      <div class="track" id="heroTrack"></div>
+      <button class="sl-btn prev" id="slPrev" aria-label="Previous slide"><svg class="bd-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="sl-btn next" id="slNext" aria-label="Next slide"><svg class="bd-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="dots" id="heroDots"></div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap narrow">
+      <h2 class="bd-h2 bd-barred">About</h2>
+      <div id="aboutText"></div>
+      <dl class="facts" id="facts"></dl>
+    </div>
+  </section>
+
+  <section class="block" id="map">
+    <div class="wrap">
+      <h2 class="label">Exhibition map</h2>
+      <div class="plan" id="plan"></div>
+    </div>
+  </section>
+
+  <section class="block ruled" id="programs">
+    <div class="wrap">
+      <h2 class="label">Programs</h2>
+      <div class="tabs" role="tablist" aria-label="Program days" id="dayTabs"></div>
+      <div class="day-panel" id="dayPanel" role="tabpanel" tabindex="0"></div>
+    </div>
+  </section>
+
+  <section class="block ruled" id="exhibitions">
+    <div class="wrap">
+      <h2 class="label">Exhibitions</h2>
+      <div class="ex-grid" id="exGrid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="organizers">
+  <div class="wrap" id="footInner"></div>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <div class="dlg-bar"><span class="dlg-tag" id="dlgTag"></span>
+    <button class="close" id="dlgClose" aria-label="Close">
+      <svg class="bd-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button></div>
+  <div class="dlg-body" id="dlgBody"></div>
+</dialog>
+
+<script src="script.js"></script>
+</body>
+</html>
