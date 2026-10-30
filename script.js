@@ -21,11 +21,11 @@ window.TANABANA = {
      Optional per item: image: "assets/x.jpg", links: [{ href: "…", label: "…" }, …] */
   exhibitions: [
     { title: "Digital Harms at the Margins", tint: "peach",
-      text: "How digital technology can deepen harm for people who are already pushed to the margins of society." },
+      text: "coming soon..." },
     { title: "Smile for the Camera", tint: "butter",
-      text: "A look at cameras, faces and being watched." },
+      text: "coming soon..." },
     { title: "AI: Unweaving the Machine", tint: "lavender",
-      text: "Pulling apart the threads of artificial intelligence: what it is, where it came from and who it serves. Explore it through interactive tools: a timeline, a map of AI, a look at social media algorithms and an AI cost calculator.",
+      text: "Explore it through interactive tools AI timeline, mind map of AI, a look at social media algorithms and an AI cost calculator.",
       links: [
         { href: "https://interactive-ai-timeline.bodyanddata.org/", label: "History of AI" },
         { href: "https://interactive-mindmap.bodyanddata.org/", label: "TanaBana · An Interactive Map of AI" },
@@ -33,11 +33,11 @@ window.TANABANA = {
         { href: "https://cost-calculator.bodyanddata.org/", label: "AI Cost Calculator" }
       ] },
     { title: "Nepal’s Digital Landscape", tint: "sky",
-      text: "A picture of how digital technology is used, built and governed in Nepal." },
+      text: "coming soon..." },
     { title: "Spin your Way to Digital Safety", tint: "sage",
-      text: "A hands-on space for learning practical ways to stay safe online." },
+      text: "coming soon..." },
     { title: "Nepal’s Biometric Present", tint: "sand",
-      text: "How fingerprints, faces and other biometric data are collected and used in Nepal today. Read the interactive report on governance, accessibility and accountability.",
+      text: "Read the interactive report on governance, accessibility and accountability.",
       links: [
         { href: "https://interactive-report.bodyanddata.org/", label: "Nepal’s Biometric Present: Governance, Accessibility and Accountability | Interactive Report" }
       ] }
@@ -59,7 +59,7 @@ window.TANABANA = {
     ] }
   ],
 
-  organizer: { name: "Body & Data", site: "https://bodyanddata.org/", instagram: "https://www.instagram.com/bodyanddata" },
+  organizer: { name: "Body & Data", site: "https://bodyanddata.org/" },
   collaborators: [
     { name: "Purple Foundation",    logo: "assets/purple.png" },
     { name: "Digital Rights Nepal", logo: "assets/drn.png" },
@@ -128,7 +128,7 @@ window.TANABANA = {
       ? `<div class="gal">${d.sessions.map((s, j) => s.image
           ? `<button class="g-item" data-pic="${i}:${j}" aria-label="View larger"><img src="${esc(s.image)}" alt="${esc(s.alt || ["Poster", s.label, s.title, s.subtitle].filter(Boolean).join(". "))}"></button>`
           : `<div class="g-text"><span class="time">${esc(s.time || "")}</span><span><strong>${esc(s.title)}</strong>${s.place ? `<br><span class="muted">${esc(s.place)}</span>` : ""}</span></div>`).join("")}</div>`
-      : `<p class="soon">Program details for ${esc(d.label)} will be added here. Follow <a href="${esc(D.organizer.instagram)}" target="_blank" rel="noopener">@bodyanddata</a> for updates.</p>`;
+      : `<p class="soon">Program details for ${esc(d.label)} will be added here. Follow for updates.</p>`;
   }
   tabsEl.addEventListener("keydown", e => {
     const n = D.days.length, cur = [...tabsEl.children].findIndex(t => t.getAttribute("aria-selected") === "true");
@@ -153,7 +153,6 @@ window.TANABANA = {
       <h2 class="label inv">Organizer</h2>
       <a class="bd-logo" href="${esc(o.site)}" target="_blank" rel="noopener"><img src="assets/logo.png" alt="${esc(o.name)}"></a>
       <p class="links"><a href="${esc(o.site)}" target="_blank" rel="noopener">bodyanddata.org</a>
-        <a href="${esc(o.instagram)}" target="_blank" rel="noopener">Instagram @bodyanddata</a></p>
     </div>
     ${D.collaborators.length ? `<div class="foot-col wide"><h2 class="label inv">Our collaborators</h2><div class="chips">${D.collaborators.map(chip).join("")}</div></div>` : ""}
     ${D.venuePartner ? `<div class="foot-col"><h2 class="label inv">Venue partner</h2><div class="chips">${chip(D.venuePartner)}</div></div>` : ""}`;
