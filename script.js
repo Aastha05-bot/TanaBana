@@ -65,9 +65,14 @@ window.TANABANA = {
       ] },
     { title: "Nepal’s Digital Landscape", tint: "sky",
       image: "assets/NDL/_79A9439.jpg",
-      images: ["assets/NDL/_79A9439.jpg"] },
+      text: "Martin Chautari was one of the collaborators during 'Tana Bana: weaving through technology, power and justice.' Their section included various research publications on Digital Rights & Nepal’s Digital Landscape. We thank Martin Chautari for their valueable contribution in Tana Bana.",
+      images: ["assets/NDL/_79A9439.jpg",
+        "assets/NDL/_79A8881.jpg"
+      ] },
     { title: "Spin your Way to Digital Safety", tint: "sage",
       image: "assets/Spin/_79A9034.jpg",
+      excerpt: "As part of Tana Bana collaborative exhibition, Digital Rights Nepal set up an installation titled \"Spin Your Way to Digital Safety\" along with a panel discussion titled \"Children’s Digital Rights, Online Safety and Age Assurance in Nepal\".",
+      remaining: "The main aim of this exhibition was to make the visitors understand that digital rights and safety are part of their everyday lives, not abstract or technical concepts. By the end of Tana Bana, this part of the exhibition aimed to make audience more aware of their rights, more confident about navigating digital spaces safely and responsibly, and motivated to think critically about their own digital experiences and those of others. We thank Digital Rights Nepal team and the speakers of the panel for their valueable time and effort in the exhibition.",
       images: [
         "assets/Spin/_79A9034.jpg",
         "assets/Spin/_79A8921.jpg",
