@@ -34,7 +34,7 @@ window.TANABANA = {
         "assets/Purple foundation/_79A8888.jpg"
       ] },
     { title: "Smile for the Camera", tint: "butter",
-      image: "assets/DS exhibition/_79A9445.jpg",
+      image: "assets/DS exhibition/_79A8892.jpg",
       images: [
         "assets/DS exhibition/_79A8892.jpg",
         "assets/DS exhibition/_79A9432.jpg",
