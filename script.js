@@ -4,7 +4,7 @@ window.TANABANA = {
   /* Cover slides, in order. */
   hero: [
     { art: true, src: "assets/hero.jpg", hold: 5, alt: "TanaBana: Weaving through Technology, Power and Justice. Pink and orange embroidered letters on a woven purple background." },
-    { video: "assets/Video1.MOV", poster: "assets/slide-1.jpg",
+    { video: "assets/IMG_9705.MOV", poster: "assets/slide-1.jpg",
       alt: "Slow-motion pan across a wall installation of eye photographs held in a net, with coloured paper cards hanging from strings in front." },
     { video: "assets/Video2.MOV", poster: "assets/slide-2.jpg",
       alt: "Slow motion: two visitors walk among hundreds of coloured paper cards hanging from the ceiling on strings." },
