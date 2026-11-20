@@ -30,14 +30,19 @@
 
 <main id="main">
   <section class="hero" aria-label="TanaBana">
-    <h1 class="sr">TanaBana: Weaving Through Technology, Power and Justice</h1>
-    <div class="slider" id="slider" role="region" aria-roledescription="carousel" aria-label="TanaBana images">
-      <div class="track" id="heroTrack"></div>
-      <button class="sl-btn prev" id="slPrev" aria-label="Previous slide"><svg class="bd-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <button class="sl-btn next" id="slNext" aria-label="Next slide"><svg class="bd-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-      <div class="dots" id="heroDots"></div>
-    </div>
-  </section>
+  <h1 class="sr">TanaBana: Weaving Through Technology, Power and Justice</h1>
+  <div class="slider" id="slider" role="region" aria-roledescription="carousel" aria-label="TanaBana images">
+    <div class="track" id="heroTrack"></div>
+    <button class="sl-btn prev" id="slPrev" aria-label="Previous slide"><svg class="bd-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button class="sl-btn next" id="slNext" aria-label="Next slide"><svg class="bd-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    <div class="dots" id="heroDots"></div>
+    <button class="sl-pause" id="slPause" type="button" aria-label="Pause slideshow">
+      <svg class="bd-icon ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>
+      <svg class="bd-icon ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg>
+    </button>
+    <div class="hero-bar" aria-hidden="true"><i id="heroBar"></i></div>
+  </div>
+</section>
 
   <section class="about" id="about">
     <div class="wrap narrow">
@@ -66,6 +71,16 @@
     <div class="wrap">
       <h2 class="label">Exhibitions</h2>
       <div class="ex-grid" id="exGrid"></div>
+    </div>
+  </section>
+
+  <section class="block exhibition-page" id="exhibitionPage" hidden aria-labelledby="exhibitionTitle">
+    <div class="wrap">
+      <button class="bd-btn bd-btn--ghost exhibition-back" id="exhibitionBack" type="button">
+        <svg class="bd-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"/></svg>
+        Back to exhibitions
+      </button>
+      <article class="exhibition-content" id="exhibitionContent"></article>
     </div>
   </section>
 </main>

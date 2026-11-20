@@ -1,15 +1,15 @@
 /* All site content lives here. Edit this file; no other file needs to change. */
 window.TANABANA = {
   name: "TanaBana",
-  /* Cover slides, in order. { art: true } = the TanaBana artwork on plain purple; others get a blurred photo backdrop. */
+  /* Cover slides, in order. */
   hero: [
-    { art: true, src: "assets/hero.jpg", alt: "TanaBana: Weaving through Technology, Power and Justice. Pink and orange embroidered letters on a woven purple background." },
-    { src: "assets/slide-1.jpg", alt: "A visitor reads printed cards hanging from strings among lines of red thread at the exhibition." },
-    { src: "assets/slide-2.jpg", alt: "A woman holds and reads a red card hanging from a string, in front of a wall of surveillance camera pictures." },
-    { src: "assets/slide-3.jpg", alt: "A visitor reads printed cards hanging from strings among lines of red thread at the exhibition." },
-    { src: "assets/slide-4.jpg", alt: "A visitor reads printed cards hanging from strings among lines of red thread at the exhibition." }
-
-
+    { art: true, src: "assets/hero.jpg", hold: 5, alt: "TanaBana: Weaving through Technology, Power and Justice. Pink and orange embroidered letters on a woven purple background." },
+    { video: "D:\\BodyAndData\\TanaBana\\assets\\Video1.MOV", poster: "assets/slide-1.jpg",
+      alt: "Slow-motion pan across a wall installation of eye photographs held in a net, with coloured paper cards hanging from strings in front." },
+    { video: "assets/Video2.MOV", poster: "assets/slide-2.jpg",
+      alt: "Slow motion: two visitors walk among hundreds of coloured paper cards hanging from the ceiling on strings." },
+    { video: "assets/Video3.MOV", poster: "assets/slide-3.jpg",
+      alt: "Slow motion: speakers sit on a courtyard stage under a tent, with a TanaBana banner behind them, while the audience listens." }
   ],
   about: [
     "The digital technologies we experience today, powerful and dazzling, are built upon contributions from many communities and many pasts. Amidst dominant, monolithic narratives and disorienting visions of post-human intelligence, we must remember that digital technology has a history deeply rooted in the human, the material, and the analogue. Weaving technologies are part of this history.TanaBana, meaning weaving, invites us to trace these threads- to look back at the histories, dissect the power structures that shape it, and unravel its multilayered impacts on our communities. By recognizing these interconnections, we open up space to imagine digital futures that are more diverse, just, inclusive, and full of possibility."
@@ -138,29 +138,77 @@ window.TANABANA = {
   const TINTS = ["lavender", "butter", "peach", "sky", "sage", "sand"];
 
   /* ---------- hero slider ---------- */
-  const SL = D.hero, track = $("heroTrack"), dotsEl = $("heroDots");
-  track.innerHTML = SL.map((m, i) => `<div class="hs${m.art ? " art" : ""}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${SL.length}">
-    ${m.art ? "" : `<img class="hs-bg" src="${esc(m.src)}" alt="">`}<img class="hs-fg" src="${esc(m.src)}" alt="${esc(m.alt)}" ${i ? 'loading="lazy"' : ""}></div>`).join("");
+  const SL = D.hero, track = $("heroTrack"), dotsEl = $("heroDots"), sl = $("slider");
+  const bar = $("heroBar"), pauseBtn = $("slPause");
+  track.innerHTML = SL.map((m, i) => `<div class="hs${m.art ? " art" : ""}${m.video ? " vid" : ""}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${SL.length}">
+    ${m.video
+      ? `<img class="hs-bg" src="${esc(m.poster)}" alt=""><video class="hs-fg" muted playsinline preload="none" poster="${esc(m.poster)}" aria-label="${esc(m.alt)}"></video>`
+      : `${m.art ? "" : `<img class="hs-bg" src="${esc(m.src)}" alt="">`}<img class="hs-fg" src="${esc(m.src)}" alt="${esc(m.alt)}" ${i ? 'loading="lazy"' : ""}>`}</div>`).join("");
   dotsEl.innerHTML = SL.map((_, i) => `<button class="dot" aria-label="Go to slide ${i + 1}"></button>`).join("");
   const slideEls = [...track.children], dotEls = [...dotsEl.children];
-  let cur = 0;
+  const vids = slideEls.map((el, i) => SL[i].video ? el.querySelector("video") : null);
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches || (navigator.connection && navigator.connection.saveData);
+  let cur = 0, auto = !calm, inView = true, timer = 0;
+
+  const load = i => { i = (i + SL.length) % SL.length; const v = vids[i]; if (v && !v.getAttribute("src")) { v.preload = "auto"; v.src = SL[i].video; } };
+  const barTo = (frac, ms) => { bar.style.transition = ms ? `width ${ms}ms linear` : "none"; bar.style.width = frac * 100 + "%"; };
+  const hold = i => { clearTimeout(timer); const secs = SL[i].hold || 5; barTo(0, 0);
+    if (auto && inView) { void bar.offsetWidth; barTo(1, secs * 1000); timer = setTimeout(() => showSlide(cur + 1), secs * 1000); } };
+  function play(i) {
+    clearTimeout(timer);
+    const v = vids[i];
+    if (!v) { hold(i); return; }
+    load(i);
+    v.currentTime = 0; barTo(0, 0);
+    if (!auto || !inView) return;
+    const p = v.play(); if (p && p.catch) p.catch(() => hold(i));
+  }
   function showSlide(i) {
     cur = (i + SL.length) % SL.length;
-    track.style.transform = `translateX(${-100 * cur}%)`;
-    slideEls.forEach((el, j) => { el.inert = j !== cur; el.setAttribute("aria-hidden", j !== cur); });
+    slideEls.forEach((el, j) => {
+      el.classList.toggle("on", j === cur);
+      el.inert = j !== cur; el.setAttribute("aria-hidden", j !== cur);
+      if (j !== cur && vids[j]) vids[j].pause();
+    });
     dotEls.forEach((el, j) => { el.classList.toggle("on", j === cur); j === cur ? el.setAttribute("aria-current", "true") : el.removeAttribute("aria-current"); });
+    load(cur); load(cur + 1);
+    play(cur);
   }
+  vids.forEach((v, i) => { if (!v) return;
+    v.addEventListener("ended", () => { if (i === cur && auto) showSlide(cur + 1); });
+    v.addEventListener("timeupdate", () => { if (i === cur && v.duration) barTo(v.currentTime / v.duration, 300); });
+    v.addEventListener("error", () => { if (i === cur) hold(i); });
+  });
+  const syncPause = () => { pauseBtn.setAttribute("aria-label", auto ? "Pause slideshow" : "Play slideshow");
+    pauseBtn.classList.toggle("paused", !auto); };
+  function setAuto(on) {
+    auto = on; syncPause();
+    const v = vids[cur];
+    if (v) { if (auto && inView) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } else v.pause(); }
+    else hold(cur);
+  }
+  pauseBtn.addEventListener("click", () => setAuto(!auto));
   $("slPrev").addEventListener("click", () => showSlide(cur - 1));
   $("slNext").addEventListener("click", () => showSlide(cur + 1));
   dotsEl.addEventListener("click", e => { const b = e.target.closest(".dot"); if (b) showSlide(dotEls.indexOf(b)); });
-  let sx = null; const sl = $("slider");
+  let sx = null;
   sl.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") sx = e.clientX; });
   sl.addEventListener("pointerup", e => { if (sx === null) return; const dx = e.clientX - sx; sx = null; if (Math.abs(dx) > 50) showSlide(cur + (dx < 0 ? 1 : -1)); });
   window.addEventListener("keydown", e => {
     if ($("dlg").open || window.scrollY > sl.offsetHeight / 2 || /INPUT|TEXTAREA/.test(e.target.tagName)) return;
     if (e.key === "ArrowRight") showSlide(cur + 1); else if (e.key === "ArrowLeft") showSlide(cur - 1);
   });
-  showSlide(0);
+  const visible = () => {
+    const was = inView; inView = !document.hidden && heroSeen;
+    if (was === inView) return;
+    const v = vids[cur];
+    if (v) { if (inView && auto) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } else v.pause(); }
+    else hold(cur);
+  };
+  let heroSeen = true;
+  if ("IntersectionObserver" in window) new IntersectionObserver(([en]) => { heroSeen = en.isIntersecting; visible(); }, { threshold: .25 }).observe(sl);
+  document.addEventListener("visibilitychange", visible);
+  syncPause(); showSlide(0);
 
   /* ---------- hero: keep the artwork exactly one screen tall under the header ---------- */
   const setHeaderH = () => document.documentElement.style.setProperty("--hh", $("top").offsetHeight + "px");
@@ -258,19 +306,59 @@ window.TANABANA = {
   /* ---------- dialog ---------- */
   const dlg = $("dlg"), body = $("dlgBody"), tag = $("dlgTag");
   let opener = null;
+  const exhibitionPage = $("exhibitionPage");
+  let returnToOpener = false;
   function openExhibition(i) {
+    const e = D.exhibitions[i];
+    if (!e) return;
+    opener = document.querySelector(`[data-ex="${i}"]`);
+    const route = `#exhibition-${i + 1}`;
+    if (location.hash === route) showExhibition(i);
+    else location.hash = route;
+  }
+  function showExhibition(i) {
     const e = D.exhibitions[i];
     const links = e.links || (e.link ? [e.link] : []);
     const images = e.images || (e.image ? [e.image] : []);
-    tag.textContent = "Exhibition";
-    body.innerHTML = `<h2 id="dlgTitle" class="bd-h3">${esc(e.title)}</h2>
-      ${e.text ? `<p>${esc(e.text)}</p>` : ""}
-      ${e.excerpt ? `<p class="exhibition-excerpt">${esc(e.excerpt)} <span class="exhibition-more" hidden>${esc(e.remaining)}</span><button class="read-more" type="button" aria-expanded="false">read more</button></p>` : ""}
-      ${images.length ? `<div class="exhibition-gallery">${images.map((src, index) => `<img class="dlg-img" src="${esc(src)}" alt="${esc(e.title + " photo " + (index + 1))}">`).join("")}</div>` : ""}
+    const description = e.text || `${e.excerpt || ""}${e.remaining || ""}`;
+    $("exhibitionContent").innerHTML = `<h1 id="exhibitionTitle" class="bd-h2">${esc(e.title)}</h1>
+      ${description ? `<p>${esc(description)}</p>` : ""}
+      ${images.length ? `<div class="exhibition-gallery">${images.map((src, index) => `<img class="dlg-img" src="${esc(src)}" alt="${esc(e.title + " photo " + (index + 1))}" loading="lazy">`).join("")}</div>` : ""}
       ${links.length && e.linkHeading ? `<p class="dlg-links-heading">${esc(e.linkHeading)}</p>` : ""}
       ${links.length ? `<div class="dlg-links">${links.map(l => `<a class="bd-btn" href="${esc(l.href)}" target="_blank" rel="noopener">${esc(l.label)} ${arrow}</a>`).join("")}</div>` : ""}`;
-    dlg.className = ""; dlg.showModal();
+    [...$("main").children].forEach(section => { section.hidden = section !== exhibitionPage; });
+    exhibitionPage.hidden = false;
+    $("organizers").hidden = true;
+    $("exhibitionBack").focus();
+    window.scrollTo(0, 0);
   }
+  function syncExhibitionRoute() {
+    const route = location.hash.match(/^#exhibition-(\d+)$/);
+    if (route) {
+      const i = Number(route[1]) - 1;
+      if (D.exhibitions[i]) {
+        showExhibition(i);
+        return;
+      }
+    }
+    if (!exhibitionPage.hidden) {
+      [...$("main").children].forEach(section => { section.hidden = section === exhibitionPage; });
+      exhibitionPage.hidden = true;
+      $("organizers").hidden = false;
+      if (returnToOpener) {
+        (opener || $("exGrid").querySelector("button"))?.focus();
+        returnToOpener = false;
+        opener = null;
+      }
+    }
+  }
+  $("exhibitionBack").addEventListener("click", () => {
+    returnToOpener = true;
+    history.replaceState(null, "", "#exhibitions");
+    syncExhibitionRoute();
+  });
+  window.addEventListener("hashchange", syncExhibitionRoute);
+  syncExhibitionRoute();
   function openPic(key) {
     const [i, j] = key.split(":").map(Number), p = D.days[i].sessions[j];
     tag.textContent = D.days[i].label;
